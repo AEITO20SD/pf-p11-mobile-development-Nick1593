@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MatchMaker.MainPage"
+             BackgroundColor="Black">
+
+    <ContentPage.Content>
+        <StackLayout Margin="15, 25">
+            <Image Source="https://logos-world.net/wp-content/uploads/2020/09/Tinder-Emblem-700x394.png" Margin="0, 0, 0, 20" />
+
+            <!--Input fields-->
+            
+            <Label Text="PrimaryName" />
+            <Entry x:Name="PrimaryName" />
+            <Label Text="SecondaryName" />
+            <Entry x:Name="SecondaryName" />
+
+            <Button Text="Match" x:Name="BtnCalculateMatch" Clicked="OnClickCalculateMatch" TextColor="Black" Background="White"/>
+
+            <ActivityIndicator IsRunning="False" x:Name="Loading" IsVisible="false" />
+
+            <!--Awnser-->
+            <Grid>
+                <Image Source="https://names4ever.azurewebsites.net/images/blog/Heart-symbol.png" HeightRequest="100" x:Name="Hart" IsVisible="false"  />
+                <Label HorizontalOptions="Center" x:Name="TxtResult" Margin="0, 32" FontSize="Medium" FontAttributes="Bold" />
+            </Grid>
+
+            <!--Settings link-->
+            <Label Text="Settings" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="EndAndExpand">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnNextPageClick" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
