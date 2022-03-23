@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tamagotchi.Android", "Tamagotchi\Tamagotchi.Android\Tamagotchi.Android.csproj", "{9E06014D-ACD6-4138-80BC-C9FAD6ED50AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tamagotchi", "Tamagotchi\Tamagotchi\Tamagotchi.csproj", "{CC058122-5DFF-47E9-B852-8B48E9B6FF9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tamagotchi", "Tamagotchi\Tamagotchi\Tamagotchi.csproj", "{CC058122-5DFF-47E9-B852-8B48E9B6FF9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinMigration", "XamarinMigration\XamarinMigration.csproj", "{C3AACD68-E915-438D-A927-9C6F869EFBFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{CC058122-5DFF-47E9-B852-8B48E9B6FF9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC058122-5DFF-47E9-B852-8B48E9B6FF9E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CC058122-5DFF-47E9-B852-8B48E9B6FF9E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C3AACD68-E915-438D-A927-9C6F869EFBFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3AACD68-E915-438D-A927-9C6F869EFBFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3AACD68-E915-438D-A927-9C6F869EFBFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3AACD68-E915-438D-A927-9C6F869EFBFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

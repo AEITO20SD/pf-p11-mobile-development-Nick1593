@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
   </PropertyGroup>
 
@@ -11,12 +11,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="images\eggs\egg_fase_2.png" />
+    <None Remove="images\eggs\egg_fase_3.png" />
+    <None Remove="images\eggs\egg_fase_4.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="images\eggs\egg_fase_2.png" />
+    <EmbeddedResource Include="images\eggs\egg_fase_3.png" />
+    <EmbeddedResource Include="images\eggs\egg_fase_4.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <Folder Include="images\pets\yoshi\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
 </Project>
