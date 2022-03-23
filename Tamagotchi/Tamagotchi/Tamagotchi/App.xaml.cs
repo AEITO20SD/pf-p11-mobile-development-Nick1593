@@ -1,6 +1,8 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Microsoft.EntityFrameworkCore;
+using Tamagotchi.Services;
 
 namespace Tamagotchi
 {
@@ -11,6 +13,10 @@ namespace Tamagotchi
             InitializeComponent();
 
             MainPage = new MainPage();
+
+            var db = new TamagotchiContext();
+
+            db.Database.Migrate();
         }
 
         protected override void OnStart()
