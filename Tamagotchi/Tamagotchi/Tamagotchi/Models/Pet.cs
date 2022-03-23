@@ -1,39 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace Tamagotchi.Models
 {
     public class Pet
     {
-        private int _health = 100;
-        private int _minHealth = 0;
-        private int _maxHealth = 100;
+        private readonly static int _health = 100;
+        private readonly static int _attention = 100;
+        private readonly static int _nutrition = 100;
+        private readonly static int _sleep = 100;
+        private readonly DateTime _birth = DateTime.Now;
 
-        private int _attention = 100;
-        private int _minAttention = 0;
-        private int _maxAttention = 150;
-
-        private int _nutrition;
-        private int _minNutrition = 0;
-        private int _maxNutrition = 150;
-
-        private int _sleep;
-        private int _minSleep = 0;
-        private int _maxSleep = 100;
-
-        public Pet()
-        {
-            Health = _health;
-        }
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public int Health { get; set; } = health;
-        public int Attention { get; set; } = 150;
-        public int Nutrition { get; set; } = 150;
-        public int Sleep { get; set; } = 100;
-        public DateTime Birth { get; set; }
-        public DateTime Death { get; set; }
-
+        [Key]
+        public int Id { get; set; }
+        [Required, MaxLength(100)]
+        public string PetName { get; set; }
+        [Required, Range(0,100)]
+        public int Health { get; set; } = _health;
+        [Required, Range(0,150)]
+        public int Attention { get; set; } = _attention;
+        [Required, Range(0,150)]
+        public int Nutrition { get; set; } = _nutrition;
+        [Required, Range(0,100)]
+        public int Sleep { get; set; } = _sleep;
+        protected DateTime Birth { get => _birth; }
+        protected DateTime Death { get; set; }
+        public int PetTypeId { get; set; }
+        public virtual PetType PetType { get; set; }
     }
 }
