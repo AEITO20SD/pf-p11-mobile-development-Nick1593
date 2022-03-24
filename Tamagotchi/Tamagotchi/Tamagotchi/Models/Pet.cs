@@ -25,7 +25,7 @@ namespace Tamagotchi.Models
         [Required, Range(0,100)]
         public int Sleep { get; set; } = _sleep;
         protected DateTime Birth { get => _birth; }
-        protected DateTime Death { get; set; }
+        public DateTime Death { get; set; }
         public int PetTypeId { get; set; }
         public virtual PetType PetType { get; set; }
     }

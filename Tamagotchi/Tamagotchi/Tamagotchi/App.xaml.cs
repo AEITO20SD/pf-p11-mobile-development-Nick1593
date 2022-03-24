@@ -1,14 +1,15 @@
 ﻿using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using Microsoft.EntityFrameworkCore;
 using Tamagotchi.Services;
+using Tamagotchi.ViewModels;
 
 namespace Tamagotchi
 {
     public partial class App : Application
     {
-        public App()
+        public readonly TamagotchiContext _context;
+        public App(TamagotchiContext context)
         {
             InitializeComponent();
 
@@ -17,10 +18,15 @@ namespace Tamagotchi
             var db = new TamagotchiContext();
 
             db.Database.Migrate();
+
+            _context = context;
         }
 
         protected override void OnStart()
         {
+            var vm = new MainPageViewModel(_context);
+
+            vm.CheckTamagotchi();
         }
 
         protected override void OnSleep()
