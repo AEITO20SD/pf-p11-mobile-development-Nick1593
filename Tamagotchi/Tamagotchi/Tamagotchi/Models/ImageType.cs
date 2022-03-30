@@ -6,6 +6,7 @@ namespace Tamagotchi.Models
 {
     public class ImageType
     {
+        // Imagetype to control which image to show at certain values
         [Key]
         public int Id { get; set; }
         [Required, MaxLength(200)]

@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace Tamagotchi.Services
 {
+    // Property changed to bring changes in variables to the screen
     public class OnPropertyChanged : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

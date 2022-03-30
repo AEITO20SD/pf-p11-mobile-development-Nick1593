@@ -9,12 +9,15 @@ namespace Tamagotchi.Services
 {
     public class TamagotchiContext : DbContext
     {
+        // database name
         private readonly string _databasename = "tamagotchi.db";
+        // "tags" of images
         private readonly List<string> _tags = new List<string> { "Happy", "Neutral", "Sad", "Sleep", "Dead", "Egg_Fase_1", "Egg_Fase_2", "Egg_Fase_3", "Egg_Fase_4" };
+        // DbSet
         public DbSet<Pet> Pets { get; set; }
         public DbSet<PetType> PetTypes { get; set; }
         public DbSet<ImageType> ImageTypes { get; set; }
-
+        // ctor
         public TamagotchiContext()
         {
             // Needed for IOS
@@ -28,6 +31,7 @@ namespace Tamagotchi.Services
 
             optionsBuilder.UseSqlite($"Filename={dbpath}");
         }
+        // Seeding
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Pettypes

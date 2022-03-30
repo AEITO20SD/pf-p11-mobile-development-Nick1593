@@ -7,5 +7,4 @@
     <StackLayout>
         <Image Source="{local:EmbeddedImage Tamagotchi.images.eggs.egg_fase_2.png}" />
     </StackLayout>
-
 </ContentPage>

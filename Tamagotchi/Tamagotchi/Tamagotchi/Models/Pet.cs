@@ -6,6 +6,7 @@ namespace Tamagotchi.Models
 {
     public class Pet
     {
+        // private default values on pet creation
         private readonly static int _health = 100;
         private readonly static int _attention = 100;
         private readonly static int _nutrition = 100;
