@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Tamagotchi.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -51,6 +52,7 @@ namespace Tamagotchi.Migrations
                     Attention = table.Column<int>(type: "INTEGER", nullable: false),
                     Nutrition = table.Column<int>(type: "INTEGER", nullable: false),
                     Sleep = table.Column<int>(type: "INTEGER", nullable: false),
+                    Death = table.Column<DateTime>(type: "TEXT", nullable: false),
                     PetTypeId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
