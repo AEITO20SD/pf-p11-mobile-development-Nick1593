@@ -5,14 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Tamagotchi.Services;
 
 namespace Tamagotchi
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+        public MainPage(TamagotchiService service)
         {
             InitializeComponent();
+
         }
     }
 }

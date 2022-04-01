@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Input;
 using Tamagotchi.Services;
 
 namespace Tamagotchi.ViewModels
 {
-    // Baseviewmodel to allow commands to be binded
-    public abstract class BaseViewModel : NotifyPropertyChanged
+    // Property changed to bring changes in variables to the screen
+    public abstract class BaseViewModel : INotifyPropertyChanged
     {
-        public Dictionary<string, ICommand> Commands { get; protected set; }
-        public BaseViewModel()
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
-            Commands = new Dictionary<string, ICommand>();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
