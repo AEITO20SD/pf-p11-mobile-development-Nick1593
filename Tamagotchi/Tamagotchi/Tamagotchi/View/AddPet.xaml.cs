@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace Tamagotchi.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddPet : ContentView
+    public partial class AddPet : ContentPage
     {
         public AddPet()
         {
