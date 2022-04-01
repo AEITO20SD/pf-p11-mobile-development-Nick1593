@@ -16,6 +16,7 @@ namespace Tamagotchi
             InitializeComponent();
 
             _container.Register<ITamagotchiService, TamagotchiService>();
+            _container.Register<IPetTypeService, PetTypeService>();
             _container.Register<TamagotchiContext>();
 
             MainPage = new MainPage(_container.Resolve<TamagotchiService>());
