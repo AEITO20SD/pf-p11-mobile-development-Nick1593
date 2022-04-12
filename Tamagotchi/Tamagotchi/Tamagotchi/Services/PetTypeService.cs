@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Tamagotchi.Models;
 using Tamagotchi.Interfaces;
@@ -13,9 +14,9 @@ namespace Tamagotchi.Services
         {
             _context = context;
         }
-        public async Task<List<PetType>> GetPetTypesListAsync()
+        public IList<PetType> GetPetTypesList()
         {
-            var x = await _context.PetTypes.ToListAsync();
+            var x = _context.PetTypes.Include(p => p.ImageTypes).ToList();
 
             return x;
         }

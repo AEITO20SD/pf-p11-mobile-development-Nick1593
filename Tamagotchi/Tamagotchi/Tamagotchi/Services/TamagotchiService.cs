@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Tamagotchi.Interfaces;
@@ -19,10 +20,10 @@ namespace Tamagotchi.Services
 
             return x;
         }
-        public async Task<Pet> GetPetLastOrDefault()
+        public IList<PetType> GetPetTypesList()
         {
-            var x = await _context.Pets.LastOrDefaultAsync();
-           
+            var x = _context.PetTypes.Include(p => p.ImageTypes).ToList();
+
             return x;
         }
     }

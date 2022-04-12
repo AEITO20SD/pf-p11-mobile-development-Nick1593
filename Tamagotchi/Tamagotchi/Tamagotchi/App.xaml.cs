@@ -15,22 +15,25 @@ namespace Tamagotchi
         {
             InitializeComponent();
 
-            _container.Register<ITamagotchiService, TamagotchiService>();
-            _container.Register<IPetTypeService, PetTypeService>();
-            _container.Register<TamagotchiContext>();
+            _container = new TinyIoCContainer();
 
-            MainPage = new MainPage(_container.Resolve<TamagotchiService>());
+            _container.Register<TamagotchiContext>();
+            _container.Register<ITamagotchiService, TamagotchiService>();
+
+            MainPage = new NavigationPage(new MainPage(_container.Resolve<TamagotchiService>()));
 
             var db = new TamagotchiContext();
 
             db.Database.Migrate();
         }
 
-        protected override void OnStart()
+        protected async override void OnStart()
         {
             var vm = new MainPageViewModel(_container.Resolve<TamagotchiService>());
 
-            vm.CheckTamagotchi();
+            //var vm = (MainPageViewModel)MainPage.BindingContext;
+
+            await vm.CheckTamagotchi();
         }
 
         protected override void OnSleep()

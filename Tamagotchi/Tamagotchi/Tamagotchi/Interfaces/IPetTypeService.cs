@@ -6,6 +6,6 @@ namespace Tamagotchi.Interfaces
 {
     public interface IPetTypeService
     {
-        public Task<List<PetType>> GetPetTypesListAsync();
+        public IList<PetType> GetPetTypesList();
     }
 }

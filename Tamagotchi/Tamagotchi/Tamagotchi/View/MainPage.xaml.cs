@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Tamagotchi.Services;
+using Tamagotchi.ViewModels;
 
 namespace Tamagotchi
 {
     public partial class MainPage : ContentPage
     {
+        private readonly MainPageViewModel _viewModel;
         public MainPage(TamagotchiService service)
         {
             InitializeComponent();
-
+            _viewModel = new MainPageViewModel(service);
+            BindingContext = _viewModel;
         }
     }
 }
