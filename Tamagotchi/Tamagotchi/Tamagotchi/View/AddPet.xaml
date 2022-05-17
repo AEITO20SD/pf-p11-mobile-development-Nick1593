@@ -1,20 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:mvvm="clr-namespace:Tamagotchi.ViewModels"
              xmlns:local="clr-namespace:Tamagotchi.CustomMarkup"
+             xmlns:mvvm="clr-namespace:Tamagotchi.ViewModels"
              x:Class="Tamagotchi.View.AddPet">
+    <!--
+    <ContentPage.BindingContext>
+        <mvvm:AddPetViewModel />
+    </ContentPage.BindingContext>
+    -->
+    
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Margin="50,35">
+            <Label Text="Select Pet" FontSize="Large" /> 
             <ListView
                 ItemsSource="{Binding PetTypes}"
-                SelectedItem="{Binding SelectedPetType}">
+                SelectedItem="{Binding PetType}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Image Source="{local:EmbeddedImage Binding ImageTypes[5].URL }" />
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout>
+                                    <Label Text="{Binding TypeName}" FontSize="Medium" />
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Button x:Name="confirmButton"  Text="Confirm" Command="{Binding SelectTypeCommand}" IsVisible="{Binding HasBeenSet}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

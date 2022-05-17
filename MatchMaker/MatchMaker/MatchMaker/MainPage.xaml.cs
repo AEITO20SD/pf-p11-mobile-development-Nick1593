@@ -65,7 +65,7 @@ namespace MatchMaker
 
             return result.ToString() + "%";
         }
-        private string CalculateCharMatch(string primary, string secondary)
+        public string CalculateCharMatch(string primary, string secondary)
         {
             int result = 0;
             string vowels = "aeiouy";

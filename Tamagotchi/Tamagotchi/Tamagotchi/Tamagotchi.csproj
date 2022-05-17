@@ -11,6 +11,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Interfaces\IPetTypeService.cs" />
+    <Compile Remove="Services\PetTypeService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="images\eggs\egg_fase_2.png" />
     <None Remove="images\eggs\egg_fase_3.png" />
     <None Remove="images\eggs\egg_fase_4.png" />

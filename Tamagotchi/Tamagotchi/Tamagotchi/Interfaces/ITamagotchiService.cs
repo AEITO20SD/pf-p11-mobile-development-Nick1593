@@ -8,5 +8,7 @@ namespace Tamagotchi.Interfaces
     {
         public Task<List<Pet>> GetPetListAsync();
         public IList<PetType> GetPetTypesList();
+        public Task SavePet(PetType petType);
+        public Task UpdatePet(Pet pet);
     }
 }

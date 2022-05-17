@@ -10,10 +10,13 @@ namespace Tamagotchi.ViewModels
     public class AddPetViewModel : BaseViewModel
     {
         private readonly TamagotchiService _services;
-        private object _selectedPetType;
+        private PetType _petType;
+        private bool _hasBeenSet;
+        public ICommand SelectTypeCommand => new Command(async () => await SelectType());
         public AddPetViewModel(TamagotchiService service)
         {
             _services = service;
+            _hasBeenSet = false;
         }
         public IList<PetType> PetTypes
         {
@@ -22,17 +25,35 @@ namespace Tamagotchi.ViewModels
                 return _services.GetPetTypesList();
             }
         }
-        public object SelectedPetType
+        public PetType PetType
         {
             get
             {
-                return _selectedPetType;
+                return _petType;
             }
             set
             {
-                _selectedPetType = value;
-                NotifyPropertyChanged("SelectedPetType");
+                _petType = value;
+                NotifyPropertyChanged("PetType");
+
+                if(value != null)
+                {
+                    _hasBeenSet = true;
+                    NotifyPropertyChanged("HasBeenSet");
+                }
             }
+        }
+        public bool HasBeenSet
+        {
+            get 
+            { 
+                return _hasBeenSet;
+            }
+        }
+        public async Task SelectType()
+        {
+            await _services.SavePet(PetType);
+            await App.Current.MainPage.Navigation.PopModalAsync();
         }
     }
 }

@@ -36,8 +36,7 @@ namespace Tamagotchi.ViewModels
         }
         public async Task GoToAddPet()
         {
-            //Page page = (Page)new AddPet(_service);
-            await Application.Current.MainPage.Navigation.PushModalAsync(new EmptyView());
+            await Application.Current.MainPage.Navigation.PushModalAsync(new AddPet(_service));
         }
     }
 }

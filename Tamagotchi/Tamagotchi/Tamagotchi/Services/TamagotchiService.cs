@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -22,9 +23,30 @@ namespace Tamagotchi.Services
         }
         public IList<PetType> GetPetTypesList()
         {
-            var x = _context.PetTypes.Include(p => p.ImageTypes).ToList();
+            var x = _context.PetTypes.ToList();
 
             return x;
+        }
+        public async Task SavePet(PetType petType)
+        {
+            Console.WriteLine(petType.TypeName);
+            try
+            {
+                var pet = new Pet();
+                pet.PetType = petType;
+                pet.PetName = petType.TypeName;
+                await _context.AddAsync<Pet>(pet);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.InnerException.Message);
+            }
+        }
+        public async Task UpdatePet(Pet pet)
+        {
+            _context.Pets.Update(pet);
+            await _context.SaveChangesAsync();
         }
     }
 }

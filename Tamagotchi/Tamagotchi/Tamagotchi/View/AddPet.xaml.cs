@@ -8,12 +8,13 @@ namespace Tamagotchi.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddPet : ContentPage
     {
-        private AddPetViewModel _viewModel;
-        public AddPet(TamagotchiService service)
+        private readonly AddPetViewModel _viewModel;
+        public AddPet(TamagotchiService service) 
         {
             InitializeComponent();
             _viewModel = new AddPetViewModel(service);
             BindingContext = _viewModel;
         }
+        protected override bool OnBackButtonPressed() => true;
     }
 }
