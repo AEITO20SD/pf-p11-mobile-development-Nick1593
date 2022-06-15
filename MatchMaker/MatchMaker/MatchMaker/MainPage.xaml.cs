@@ -7,20 +7,101 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Essentials;
+using MatchMaker.Core;
+using MatchMaker.Interfaces;
 
 namespace MatchMaker
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+        private readonly CalculateASCII _calculateASCII;
+        private readonly CalculateCharacters _calculateCharacters;
+        private readonly NameValidation _nameValidation;
+        private IList<Entry> _entries = new List<Entry>();
+        private Label _textResult;
+        private Image _hart;
+        private ActivityIndicator _loading;
+        private bool _preferences;
+
+        public MainPage(CalculateASCII calculateASCII, CalculateCharacters calculateCharacters, NameValidation nameValidation)
         {
             InitializeComponent();
+            _calculateASCII = calculateASCII;
+            _calculateCharacters = calculateCharacters;
+            _nameValidation = nameValidation;
+
+            _textResult = (Label)this.FindByName("TextResult");
+            _hart = (Image)this.FindByName("Hart");
+            _loading = (ActivityIndicator)this.FindByName("Loading");
         }
-        async void OnNextPageClick(object sender, EventArgs e)
+        private async void OnNextPageClick(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new Settings());
         }
-        async void OnClickCalculateMatch(object sender, EventArgs e)
+        private async void OnClickCalculateMatch(object sender, EventArgs e)
+        {
+            Entry entry1 = (Entry)this.FindByName("PrimaryName");
+            Entry entry2 = (Entry)this.FindByName("SecondaryName");
+            _entries.Add(entry1);
+            _entries.Add(entry2);
+
+            _textResult = (Label)this.FindByName("TxtResult");
+            bool isValid = await _nameValidation.IsValidAsync(_entries);
+
+            if(isValid)
+            {
+                _hart.IsVisible = false;
+                _textResult.IsVisible = false;
+                // Do loading time
+                await LoadingTime();
+
+                _preferences = Preferences.Get("math_type", false);
+
+                if (_preferences)
+                {
+                    int result = await _calculateCharacters.CalculateAsync(entry1, entry2);
+                    _textResult.Text = result.ToString() + " points";
+                }
+                else
+                {
+                    int result = await _calculateASCII.CalculateAsync(entry1, entry2);
+                    _textResult.Text = result.ToString() + " %";
+                }
+
+                _hart.IsVisible = true;
+                _textResult.IsVisible = true;
+                _textResult.TextColor = Color.Green;
+            }
+            else
+            {
+                _textResult.Text = "Fields where not filled in correctly";
+                _textResult.TextColor = Color.Red;
+            }
+        }
+        private async Task LoadingTime()
+        {
+            int duration = GetLengthEntries() * 200;
+            _loading.IsRunning = true;
+            _loading.IsVisible = true;
+            await Task.Delay(duration);
+            _loading.IsRunning = false;
+            _loading.IsVisible = false;
+        }
+        private int GetLengthEntries()
+        {
+            int counter = 0;
+
+            foreach(Entry entry in _entries)
+            {
+                foreach(char c in entry.Text)
+                {
+                    counter++;
+                }
+            }
+
+            return counter;
+        }
+        /*async void OnClickCalculateMatch(object sender, EventArgs e)
         { 
             string primary = PrimaryName.Text;
             string secondary = SecondaryName.Text;
@@ -149,6 +230,6 @@ namespace MatchMaker
             }
 
             return result;
-        }
+        }*/
     }
 }
