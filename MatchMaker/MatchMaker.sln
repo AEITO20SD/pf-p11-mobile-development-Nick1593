@@ -9,9 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatchMaker.iOS", "MatchMake
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MatchMaker", "MatchMaker\MatchMaker\MatchMaker.csproj", "{A9EEF3CA-0FEB-43B3-9240-2D8972513A0C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MatchMake.Tests", "MatchMake.Tests\MatchMake.Tests.csproj", "{C5D790A3-4555-4473-A635-F20E6AB0C613}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MatchMaker.UnitTests", "MatchMake.Tests\MatchMaker.UnitTests.csproj", "{C5D790A3-4555-4473-A635-F20E6AB0C613}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing Environment", "Testing Environment\Testing Environment.csproj", "{3BE155DF-3E28-4615-97EE-6E86CB828D37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testing Environment", "Testing Environment\Testing Environment.csproj", "{3BE155DF-3E28-4615-97EE-6E86CB828D37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
