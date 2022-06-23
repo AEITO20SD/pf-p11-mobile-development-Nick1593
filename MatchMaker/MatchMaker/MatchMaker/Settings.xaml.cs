@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
+using MatchMaker.Interfaces;
+using MatchMaker.Services;
 
 namespace MatchMaker
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Settings : ContentPage
     {
-        public Settings()
+        private readonly ISettingsService _settingsService;
+        public Settings(ISettingsService settingsService)
         {
             InitializeComponent();
-            if (Preferences.Get("math_type", false))
+            _settingsService = settingsService;
+
+            if (_settingsService.GetSetting("math_type"))
             {
                 Switcher.IsToggled = true;
             }
@@ -25,11 +27,11 @@ namespace MatchMaker
         {
             if(e.Value == true)
             {
-                Preferences.Set("math_type", true);
+                _settingsService.SetSetting("math_type", true);
             }
             else
             {
-                Preferences.Set("math_type", false);
+                _settingsService.SetSetting("math_type", false);
             }
         }
     }

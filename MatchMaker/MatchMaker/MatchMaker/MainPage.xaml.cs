@@ -9,26 +9,29 @@ using Xamarin.Forms;
 using Xamarin.Essentials;
 using MatchMaker.Core;
 using MatchMaker.Interfaces;
+using MatchMaker.Services;
 
 namespace MatchMaker
 {
     public partial class MainPage : ContentPage
     {
-        private readonly CalculateASCII _calculateASCII;
-        private readonly CalculateCharacters _calculateCharacters;
-        private readonly NameValidation _nameValidation;
+        private readonly ICalculator _calculateASCII;
+        private readonly ICalculator _calculateCharacters;
+        private readonly IValidation _nameValidation;
+        private readonly ISettingsService _settingsService;
         private IList<Entry> _entries = new List<Entry>();
         private Label _textResult;
         private Image _hart;
         private ActivityIndicator _loading;
         private bool _preferences;
 
-        public MainPage(CalculateASCII calculateASCII, CalculateCharacters calculateCharacters, NameValidation nameValidation)
+        public MainPage(ICalculator calculateASCII, ICalculator calculateCharacters, IValidation nameValidation, ISettingsService settingsService)
         {
             InitializeComponent();
             _calculateASCII = calculateASCII;
             _calculateCharacters = calculateCharacters;
             _nameValidation = nameValidation;
+            _settingsService = settingsService;
 
             _textResult = (Label)this.FindByName("TextResult");
             _hart = (Image)this.FindByName("Hart");
@@ -36,8 +39,9 @@ namespace MatchMaker
         }
         private async void OnNextPageClick(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Settings());
+            await Navigation.PushAsync(new Settings(_settingsService));
         }
+        #region Private Calculate Method
         private async void OnClickCalculateMatch(object sender, EventArgs e)
         {
             Entry entry1 = (Entry)this.FindByName("PrimaryName");
@@ -48,14 +52,14 @@ namespace MatchMaker
             _textResult = (Label)this.FindByName("TxtResult");
             bool isValid = await _nameValidation.IsValidAsync(_entries);
 
-            if(isValid)
+            if (isValid)
             {
                 _hart.IsVisible = false;
                 _textResult.IsVisible = false;
                 // Do loading time
                 await LoadingTime();
 
-                _preferences = Preferences.Get("math_type", false);
+                _preferences = _settingsService.GetSetting("math_type");
 
                 if (_preferences)
                 {
@@ -78,6 +82,8 @@ namespace MatchMaker
                 _textResult.TextColor = Color.Red;
             }
         }
+        #endregion
+        #region Private Loading Method
         private async Task LoadingTime()
         {
             int duration = GetLengthEntries() * 200;
@@ -91,9 +97,9 @@ namespace MatchMaker
         {
             int counter = 0;
 
-            foreach(Entry entry in _entries)
+            foreach (Entry entry in _entries)
             {
-                foreach(char c in entry.Text)
+                foreach (char c in entry.Text)
                 {
                     counter++;
                 }
@@ -101,6 +107,8 @@ namespace MatchMaker
 
             return counter;
         }
+        #endregion
+        #region Old Code
         /*async void OnClickCalculateMatch(object sender, EventArgs e)
         { 
             string primary = PrimaryName.Text;
@@ -231,5 +239,6 @@ namespace MatchMaker
 
             return result;
         }*/
+        #endregion
     }
 }
